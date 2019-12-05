@@ -7,33 +7,36 @@ Now, this project provide some features for help you to create your REST API. th
 with [axios](https://github.com/axios/axios) in front-end
 
 ## Features
-###### Features in the project are too many and divided into 4 main parts You can control these part inside your javascript or another client site in your applications or website and they includes:
+Features in the project are too many and divided into 4 main parts You can control these part inside your javascript or another client site in your applications or website and they includes:
 
 - Authentication
 - Queries REST API
 - Media REST API
 - SESSION REST API
 
-NOTE: *these features will upgraded, also you can add your custom configurations*
+###### NOTE:
+*these features will upgraded, also you can add your custom configurations*
 
 ## Dependencies
 
-######  We are using some libraries which was lunched before and they includes:
+We are using some libraries which was lunched before and they includes:
 
 - [UNIREST Library](https://github.com/delsuza/unirest-codeigniter)
 - [JWT Helper](https://github.com/ParitoshVaidya/CodeIgniter-JWT-Sample/tree/master/application/helpers)
 - [JDF Converter](https://github.com/MahdiMajidzadeh/Codeigniter-jdf/blob/master/Jdf.php)
 - Static Tables on Database
 
-Note: *If you don't want to use our "ci_" tables, you can't use auth controllers, just delete them manually or edit*
+
+###### Note:
+*If you don't want to use our "ci_" tables, you can't use auth controllers, just delete them manually or edit*
 
 ## Installation
 
-####*easy mode*
+### easy mode
 
-###### If you want to use repository as a new project, just copy this project to your host, then follow these commands:
+If you want to use repository as a new project, just copy this project to your host, then follow these commands:
 
-<b>Config foxyntax.php:</b>
+#### Config foxyntax.php:
 
 Set your lenght of salt for encode your files and directories: (*Required*)
 ```php
@@ -77,7 +80,7 @@ $config['token_timeout'] = 1;
 // Generated token will expire in 1 minute for sample code
 // Increase this value as per requirement for production
 ```
-<b>-> Config constants.php:</b>
+#### Config constants.php
 
 Set your URL which want to access your REST API, default value was set: (*Optional*)
 ```php
@@ -90,7 +93,7 @@ defined('ACCESS_CONTROL_REQUEST_METHOD')  OR define('ACCESS_CONTROL_REQUEST_METH
 defined('CONTENT_TYPE')  OR define('CONTENT_TYPE', 'Content-Type: application/json');
 defined('ACCESS_CONTROL_ALLOW_HEADERS')  OR define('ACCESS_CONTROL_ALLOW_HEADERS', 'Access-Control-Allow-Headers: Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin');
 ```
-####*dev mode*:
+### dev mode:
 
 If you want to use manually, follow this command:
 
@@ -106,73 +109,155 @@ another required configurations like [database.php](https://codeigniter.com/user
 that's all !
 
 ## Documentation
-###### You can learn how to send HTTP request (POST recommended), we provide some controllers for get your "application/json" content and do your actions,here it is:
+You can learn how to send HTTP request (POST recommended), we provide some controllers for get your "application/json" content and do your actions,here it is:
 
-NOTE: *all of libraries are using JWT methods and you must have and
-set api key in your header request*.
+###### NOTE:
+*all of libraries are using JWT methods and you must have and set api key in your header request*.
 
-###Using Query Controller
-###### The query controllers use REST API and provide some query_builders from Foxyntax_CI by using "query" libraries.
+### Using Query Controller
+The query controllers use REST API and provide some query_builders from Foxyntax_CI by using "query" libraries.
 
-####Json Properties:
-1. "func": *string* - It defines your function which will running in 
-[Query Builder Class](https://codeigniter.com/userguide3/database/query_builder.html?highlight=query%20builder),
-[File Upload Class](https://codeigniter.com/userguide3/libraries/file_uploading.html?highlight=upload)
-and [Session Library](https://codeigniter.com/userguide3/libraries/sessions.html?highlight=session)
-like "upload", "download", "CURD" and 'session' function and etc.
+#### Json Properties:
 
-2. "cols" : *string* - It defines your coloumns which slect on your tables of SQL
-3. "table": *string* - It defines your table which select in SQL
+```js
 
-4. "join": *array* - It defines array of objects have 2 properties: "query" and "combine" <br><br>
-✔ "table"    : *string* - It defines your table which will join with first table <br><br>
-✔ "condition": *string* - It defines your condition like : "ci_user.id = ci_media.user_id" <br><br>
-✔ "type"     : *string* - It's optional and NULL is default value for it, other values like $type parameter join() in Codeigniter
-
-5. "where" : *array*  - It defines array of objects have 2 properties: "query" and "combine" <br><br>
-✔ "query"  : *string* - It defines your condition like : "id = 1" <br><br>
-✔ "combine": *string* - It's *optional* and will set "AND" by default. If you need or_where()
-instead of where(), set "OR" this property.
-
-6. "have": *array* - It's like "where" in number 5 and by config "combine" property, you can switch between have() and
-or_have() functions.
-
-7. "like": *array*  - It defines an object have 3 properties: "field", "match", "side", "combine" <br><br>
-✔ "field": *string* - It defines coloumn name <br><br>
-✔ "match": *string* - It defines your value which you looking for like it <br><br>
-✔ "side" : *string* - It defines your value which you looking for like it <br><br>
-✔ "side" : *string* - It's like another "combine" property in "where" or "have" <br><br>
-
-8. "order": *array*  - It defines array of objects have 2 properties: "col" and "val" <br><br>
-✔ "field" : *string* - It defines coloumn name <br><br>
-✔ "match" : *string* - It defines your value which you looking for like it <br><br>
-
-9. "responseType": *string* - It helps you to decide what type your response? and get values like:
-"numRows", "row", "rowArray", "resaultArray" and finally defines "result" by default if it's not defined.
-
-10. "fomratDate": *string* - It defines Regex string for change timestamp to string data by JDF.php, It's property is
-special and must be config as you want, however It's converting your column which their names is "timestamp", "start", "end"
-
-11. "row": *array* - It's another special property and when you need add value to your table, you need this property
-instead of "cols", also this property can convert your "password" and "timestamp" to hash and timestamp automatically
-
-12. "result": *bool* - It's a special property, too. when you run custom query, you need to say would you want to get
-response or not, "result" do it for you.
-
-13. "query": *string*  - It defines your SQL order manually and used with "result" and custom query only.
-14. "limit": *string*  - It defines and used for "read" request function like select()
-15. "offset": *string* - It defines and used for "read" request function like select_max()<br><br><br>
+let body = {
 
 
-###### Now you know our JSON parameters and you must to know how to call Query Library?<br><br>
-####Call Query Library:
+    /* string - 'It defines your function which will running in Query Builder Class and File Upload Class and Session Library like "upload" | "download" | "CURD" and "session_sum" function and etc' */
+    func: "join", // example
+    
+    
+    /* string - 'It defines your coloumns which select on your tables of SQL' */
+    cols: "ci_user.id, name, family", // example
+    
+    
+    /* string - 'It defines your table which select in SQL' */
+    table: "ci_user", // example
+    
+   
+    /* It defines array of objects have 3 properties: "table", "condition" and "type" */
+    join: {
+        
+        /* string - It defines your table which will join with first table */
+        table: "ci_media", // example
+        
+        /* string - It defines your condition
+        condition: "ci_user.id = ci_media.user_id", // example
+        
+        /* string - It's optional and NULL is default value for it, other values like $type parameter join() in Codeigniter */
+        type: "both", // example
+        
+    },
+    
+    
+    /* array - It defines array of objects have 2 properties */
+    where: [
+        
+        
+        {query: "ci_user.id = 1"}, // example
+        {
+        
+            /* string - It defines your condition */
+            query: "ci_user.id = 2",
+            
+            /* string - It's *optional* and will set "AND" by default. If you need or_where() instead of where(), set "OR" this property */
+            combine: "OR"
+            
+        }, // example
+        
+        // and other conditions ... 
+       
+    ],
+    
+    
+    /* array - It's like "where", you can switch between have() and or_have() functions */
+    have: [
+        
+        {query: "name = "Foxyntax", combine: "AND"}, // example
+        
+        // and other conditions ... 
+
+    ],
+    
+    
+    /* array - It defines array of objects have 4 properties: "field" | "match" | "side" | "combine" */
+    like: [
+    
+    
+        {
+        
+            /* string - It defines coloumn name */
+            filed: "name",
+            
+            /* string - It defines your value which you looking for like it */
+            match: "fox",
+            
+            /* string - It defines your value which you looking for like it */
+            side: "before",
+            
+            /* string - It's like another "combine" property in "where" or "have" */
+            combine: "OR",
+            
+        }, // example
+    
+        // and other conditions ... 
+    
+    ],
+    
+    /* array - It defines array of objects have 2 properties: "col" and "val" */
+    order: [
+        
+        {
+            /* string - It defines coloumn name */
+            field: "family",
+            
+            /* string - It defines your value which you looking for like it */
+            match: "DESC"
+        
+        } // example
+        
+        // and other conditions ... 
+    
+    ],
+    
+    
+    /* string - It helps you to decide what type your response? and get values like: "numRows", "row", "rowArray", "resaultArray" and finally defines "result" by default if it's not defined. */
+    responseType: "resultArray", // example
+    
+    
+    /* string - It's another special property and when you need add | update values in your table, you need this property instead of "cols", also this property can convert your "password" and "timestamp" to hash and timestamp automatically */
+    row: "username, password, timestamp", // example
+    
+    
+    /* bool - It's a special property, too. when you run custom query, you need to say would you want to get response or not, "result" do it for you. */
+    result: true, // example
+    
+    
+    /* string - It defines your SQL order manually and used with "result" and custom query only. */
+    query: "SELECT ci_user.id, name, family FROM ci_user INNER JOIN ci_media ON ci_media.user_id=ci_user.id", // example
+    
+    
+    /* int  - It defines and used for "read" request function like select() */
+    limit: 20 // example
+    
+    
+    /* int - It defines and used for "read" request function like select_max() */
+    offset: 10 // example
+}
+
+```
+Now you know our JSON parameters and you must to know how to call Query Library?<br><br>
+
+#### Call Query Librarys:
+
 You have to send your json by "HTTP" request like POST and before that, you need JSON Web Token and set it on your "HEADER" request to access your end point. Here, It's our patterns of URL request in Query Library: 
 
 ```php
     // URL : http://YOUR_DOMAIN/api/query/curd/NAME_OF_FUNCTION
 ```
 
-###### And here they are main functions in Query Library:
+And here they are main functions in Query Library:
 
 - create: includes "insert" | "insertBatch" ("insert" is a default value in it's "func" property)
 
@@ -185,60 +270,193 @@ You have to send your json by "HTTP" request like POST and before that, you need
 
 - custom: just call it and that will run your custom string query
  
-#### Properties of Functions
-###### For each function you can config your json request, It wont difficult. Because of your knowledge about JSON properties, we just tell you their names based of "func" property
+ <b>-> Properties of Functions: <b>
+    
+For each function you can config your json request, It won't difficult. Because of your knowledge about JSON properties, we just tell you their names based of "func" property
 
-NOTE: *Italic properties is optional*
+###### NOTE
+optional properties doesn't need to send by HTTP request, however we are using them here to know that how they're working!
 
-- #####create
+- create functions
 
-1. insert     : "row" | "table"
+1. insert:
+
+```js
+
+ let body = {
+    func: "insert", // [optional] : (leave it, if you want to use INSERT query)
+    row: "username, password, status, timestamp",
+    table: "ci_user"
+    
+}
+
+```
+
 2. insertBatch: is like insert
 
-- #####read
+- read functions
 
-1. select   : *"cols"* | "table" | *"where"* | *"have"* | *"order"* | *"like"* | *"responseType"* | *"fomratDate"* | *"limit"* | *"offset"*
-2. selectDis: is like select 
-3. selectAvg: is like select 
-4. selectMin: is like select 
-5. selectMax: is like select
-6. join     : select like with "join" property
-7. count    : "table" | *"where"* | *"have"* | *"order"* | *"like"*
+1. select:
 
-- #####update
+```js
 
-1. update: "row" | "table" | *"where"* | *"have"* | *"order"* | *"like"* |
-2. updateBatch: is like insert
+let body = {
 
-- #####delete
+    func: "select", [optional] : (leave it, if you want to use SELECT query)
+    cols: "id, name, family",  // [optional] : (leave it if you want select all columns) 
+    table: "user_meta",
+    where: [
+        {query: "id = 2"}
+    ], // [optional] : ("have", "order" and "like" properties are optional, so leave them if you needn't they)
+    responseType: "row", // [optional] : (leave it if you want to get values by result() function)
+    formatDate: "H:i:s" // [optional] : (you can config your special coloumns which have timestamp and convert it to JDF)
+    limit: null, // [optional] : (leave it if if you needn't) 
+    offset: null, // [optional] : (leave it if if you needn't)
+    
+}
+    
+```
+2. selectDis: is like select, but "func" property required
+3. selectAvg: is like select, but "func" property required
+4. selectMin: is like select, but "func" property required
+5. selectMax: is like select, but "func" property required
+6. join:
 
-1. empty   : "table"
-2. truncate: "table"
-3. delete  : "table" | *"where"* | *"have"* | *"order"* | *"like"* |
+```js
 
-- #####custom
+let body = {
+    
+    func: 'join',
+    cols: 'ci_user.id, first_name, last_name',
+    table: 'ci_user',
+    join: [
+        {table: 'admin_meta', condition: 'admin_meta.user_id = ci_user.id'}
+    ],
+    where: [
+        {query: "id = 2"}
+    ], // [optional] : ("have", "order" and "like" properties are optional, so leave them if you needn't they)
+    responseType: "row", // [optional] : (leave it if you want to get values by result() function)
+    
+}
+```
+7. count:
+
+```js
+
+let body = {
+
+    func: "count",
+    table: "ci_options",
+    have: [
+        {query: "id = 2"}
+    ], // [optional] : ("where", "order" and "like" properties are optional, so leave them if you needn't they)
+
+}
+
+```
+
+- update functions
+
+1. update:
+
+```js
+
+let body = {
+
+ func: "update", [optional] : (leave it, if you want to use UPDATE query)
+    cols: "id, name, family",  // [optional] : (leave it if you want select all columns) 
+    table: "user_meta",
+    where: [
+        {query: "id = 2"}
+    ], // [optional] : ("have", "order" and "like" properties are optional, so leave them if you needn't they)
+
+}
+
+```
+2. updateBatch: is like insert, but "func" property required
+
+- delete funcitons
+
+1. empty:
+
+```js
+
+let body = {
+
+    func: "empty"
+    table: "user_meta",
+
+}
+
+```
+
+2. truncate:
+
+```js
+
+let body = {
+
+    func: "truncate"
+    table: "user_meta",
+
+}
+
+```
+
+3. delete:
+
+```js
+
+let body = {
+
+    func: "delete" [optional] : (leave it, if you want to use DELETE FROM query)
+    table: "user_meta",
+    where: [
+        {query: "id = 2"}
+    ], // [optional] : ("have", "order" and "like" properties are optional, so leave them if you needn't they)
+
+}
+
+```
+
+- custom function
 
 1. for custom request you won't need to set "func" property, just set "query" !
 
+### Using Sessions Controllerr
 
-###Using Sessions Controller
-###### The Sessions controllers use REST API and provide to set or read sessions by usins session library in codeigniter
+The Sessions controllers use REST API and provide to set or read sessions by usins session library in codeigniter
 
-####Json Properties:
+#### Json Properties:
 
-1. "flash" : *string* - It defines for set or read flash data
-2. "sess"  : *string* - It defines for set or read session
-3. "temp"  : *string* - It defines for set or read temp
-4. "expire": *int* - It defines for set expirations
+```js
 
-####Call Sessions Libraries:
+let body = {
+
+    /* string - It defines for set or read flash data */
+    flash: "item",
+    
+    /* string - It defines for set or read session */
+    sess: "item",
+    
+    /* string - It defines for set or read temp */
+    temp: "item",
+    
+    /* int - It defines for set expirations */
+    expire: 900,
+}
+
+```
+
+##### Call Sessions Libraries:
 as you know, you must follow this format to set url for HTTP requests:
 
 ```php
     // URL : http://YOUR_DOMAIN/api/sessions/sess/NAME_OF_FUNCTION
 ```
 
-###### And here they are main functions in Sessions Libraries, we just tell you their names based of "func" property
+And here they are main functions in Sessions Libraries, we just tell you their names based of "func" property
+
 - session: includes "addSess" | "readSess" | "checkSess" | "destroy" | "unsetSess"
 ("unsetSess" is a default value in it's "func" property)
 
@@ -250,30 +468,65 @@ as you know, you must follow this format to set url for HTTP requests:
 
 #### Properties of Functions
 
-NOTE: *Italic properties is optional*
+- session
 
-- #####session
+1. addSess:
 
-1. addSess  : "sess"
-2. readSess : "sess"
-3. checkSess: "sess"
-3. distroy  : "sess"
-4. unsetSess: "sess"
+```js
 
-- #####temp
+let body = {
 
-1. addTemp  : "temp" | "expire"
-2. readTemp : "temp"
-3. unsetTemp: "temp"
+    func: "sess",
+    sess: "sessItem",
 
-- #####flash
+}
 
-1. addFlash  : "flash"
-2. readFlash : "flash"
-3. keepFlash : "flash"
-4. unsetFlash: "flash"
+```
 
-###Using Media Controller
+2. readSess : is like "addSess"
+3. checkSess: is like "addSess"
+3. distroy  : is like "addSess"
+4. unsetSess: is like "addSess" but you can only set "sess" property in data request
+
+- temp
+
+1. addTemp  : 
+
+```js
+
+let body = {
+
+    func: "temp",
+    temp: "tempItem",
+    expire: 500 // Secounds
+
+}
+
+```
+
+2. readTemp : is like "addTemp"
+3. unsetTemp: is like "addTemp" but you can only set "temp" property in data request
+
+- flash
+
+1. addFlash:
+
+```js
+
+let body = {
+
+    func: "flash",
+    flash: "flashItem",
+
+}
+
+```
+
+2. readFlash : is like "addFlash"
+3. keepFlash : is like "addFlash"
+4. unsetFlash: is like "addFlash" but you can only set "flash" property in data request
+
+### Using Media Controller
 
 
 ## Credits
