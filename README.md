@@ -27,7 +27,7 @@ We are using some libraries which was lunched before and they includes:
 - Static Tables on Database
 
 
-###### Note:
+###### NOTE:
 *If you don't want to use our "ci_" tables, you can't use auth controllers, just delete them manually or edit*
 
 ## Installation
@@ -36,7 +36,7 @@ We are using some libraries which was lunched before and they includes:
 
 If you want to use repository as a new project, just copy this project to your host, then follow these commands:
 
-#### Config foxyntax.php:
+#### Config foxyntax.php
 
 Set your lenght of salt for encode your files and directories: (*Required*)
 ```php
@@ -93,7 +93,7 @@ defined('ACCESS_CONTROL_REQUEST_METHOD')  OR define('ACCESS_CONTROL_REQUEST_METH
 defined('CONTENT_TYPE')  OR define('CONTENT_TYPE', 'Content-Type: application/json');
 defined('ACCESS_CONTROL_ALLOW_HEADERS')  OR define('ACCESS_CONTROL_ALLOW_HEADERS', 'Access-Control-Allow-Headers: Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin');
 ```
-### dev mode:
+### dev mode
 
 If you want to use manually, follow this command:
 
@@ -117,7 +117,7 @@ You can learn how to send HTTP request (POST recommended), we provide some contr
 ### Using Query Controller
 The query controllers use REST API and provide some query_builders from Foxyntax_CI by using "query" libraries.
 
-#### Json Properties:
+#### Json Properties
 
 ```js
 
@@ -249,7 +249,7 @@ let body = {
 ```
 Now you know our JSON parameters and you must to know how to call Query Library?<br><br>
 
-#### Call Query Librarys:
+#### Call Query Librarys
 
 You have to send your json by "HTTP" request like POST and before that, you need JSON Web Token and set it on your "HEADER" request to access your end point. Here, It's our patterns of URL request in Query Library: 
 
@@ -270,12 +270,12 @@ And here they are main functions in Query Library:
 
 - custom: just call it and that will run your custom string query
  
- <b>-> Properties of Functions: <b>
+#### Properties of Functions
     
 For each function you can config your json request, It won't difficult. Because of your knowledge about JSON properties, we just tell you their names based of "func" property
 
-###### NOTE
-optional properties doesn't need to send by HTTP request, however we are using them here to know that how they're working!
+###### NOTE:
+*optional properties doesn't need to send by HTTP request, however we are using them here to know that how they're working!*
 
 - create functions
 
@@ -427,7 +427,7 @@ let body = {
 
 The Sessions controllers use REST API and provide to set or read sessions by usins session library in codeigniter
 
-#### Json Properties:
+#### Json Properties
 
 ```js
 
@@ -448,7 +448,7 @@ let body = {
 
 ```
 
-##### Call Sessions Libraries:
+#### Call Sessions Libraries
 as you know, you must follow this format to set url for HTTP requests:
 
 ```php
@@ -527,9 +527,98 @@ let body = {
 4. unsetFlash: is like "addFlash" but you can only set "flash" property in data request
 
 ### Using Media Controller
+The media controllers use REST API and provide many actions which you need for manage your files like "donwload" or "read" them. for using this controller you need our table in your SQL like ci_media
 
+#### Json Properties
+```js
+
+let body = {
+
+    /* string - It defines allow types for uploading */
+    allowTypes: "png | jpg | pdf",
+    
+    
+    /* string - It defines maximum size of uploaded file */
+    maxSize: "2024", // KBs
+    
+    
+    /* string - It defines maximum width of uploaded file */
+    maxWith: "1080", // px
+    
+    
+    /* string - It defines maximum height of uploaded file */
+    maxHeight: "720", // px
+    
+    
+    /* bool - It defines is it necessary for encrypt name uploaded files or not? */
+    encryptName: true,
+    
+    
+    /* bool - It defines is it necessary for remove space uploaded files or not? */
+    removeSpace: true,
+    
+    
+    /* bool - It defines do you have one file or more? true means you have more than one */
+    multiple: true,
+    
+    
+    /* string - It defines what it your category in media directory? "goods" or "blog" or "content" or "user"? */
+    type: "goods",
+    
+    
+    /* string - It defines extention of file which can be writable */
+    extFile: ".png",
+    
+    
+    /* string - It defines owner id of file which it's file can be writable */
+    ownerId: "105",
+    
+    
+    /* int - It defines id of file in ci_media */
+    id: 110,
+    
+    /* string - It defines name of file which can be writable */
+    nameFile: "PsdF43OaddasdS", // your name of file will hashed by this controller and we show you an example like them
+    
+    
+    /* string - It defines full name of your file with extentions */
+    file: "PsdF43OaddasdS.png",
+    
+    
+    /* string - It defines origin name of your file without extentions */
+    name: "origin_name",
+    
+    
+    /* string - It defines your content */
+    content: "some_contnets"
+    
+    /* string - It defines full path directory your file */
+    path: "http://YOUR_DOMAIN/media/.../YOUR_FILE"
+     
+    
+}
+
+```
+
+#### Call Media Libraries
+for call this library, you must follow this format to set url for HTTP requests:
+
+```php
+
+    // URL : http://YOUR_DOMAIN/api/media/surf/NAME_OF_FUNCTION/TYPE_OF_FILE
+    
+    /* 
+     * TYPE_OF_FILE is OPTIONAL and should use when you want upload some file(s) which is/are not images like .png or .jpg
+     */
+     
+```
+
+#### Properties of Functions
 
 ## Credits
+This package supports every javascript frameworks or native application requests, just config and use it! for manage better your request and bring back your equations, we always prefer [axios](https://github.com/LegenD1995/axios) because of it's feature and manage your promises.
+
+Also we work on a CMS via [VUE-CLi 3](https://github.com/vuejs/vue-cli) created by this package and will ready very soon. it's repository will tagged here.
 
 ## Licenses
-
+[MIT](LICENSE)
