@@ -617,6 +617,14 @@ And here they are main functions in Sessions Libraries, they haven't more funcio
 
 1. upload
 
+if you want to use this action, you must set "images" property in your $_FILE on PHP; for example in HTML:
+
+```html
+<input type="file" name="images">
+```
+
+here they are your property to config your data HTTP request:
+
 ```js
 
 let body = {
@@ -718,7 +726,7 @@ this methods needn't any json data for HTTP request, just call it in URL then it
 
 
 ## Credits
-This package supports every javascript frameworks or native application requests, just config and use it! for manage better your request and bring back your equations, we always prefer [axios](https://github.com/LegenD1995/axios) because of it's feature and manage your promises.
+This package supports every javascript frameworks or native application requests, just config and use it! for manage better your request and bring back your equations outside of PHP, we always prefer [axios](https://github.com/LegenD1995/axios) because of it's feature and manage your promises.
 
 Also we work on a CMS via [VUE-CLi 3](https://github.com/vuejs/vue-cli) created by this package and will ready very soon. it's repository will tagged here.
 
