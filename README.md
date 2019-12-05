@@ -571,7 +571,7 @@ let body = {
     
     
     /* string - It defines owner id of file which it's file can be writable */
-    ownerId: "105",
+    owner: "105",
     
     
     /* int - It defines id of file in ci_media */
@@ -613,7 +613,109 @@ for call this library, you must follow this format to set url for HTTP requests:
      
 ```
 
-#### Properties of Functions
+And here they are main functions in Sessions Libraries, they haven't more funcion, just you have to send your HTTP request
+
+1. upload
+
+```js
+
+let body = {
+
+[Optional Properties] : (if you want to use global setting in foxyntax.php, leave it)
+    allowTypes  : "png | jpg | pdf",
+    maxSize     : "2024", 
+    maxWith     : "1080", 
+    maxHeight   : "720", 
+    encryptName : true,
+    removeSpace : true,
+    multiple    : true,
+    
+[Required Properties]
+    owner : "105",
+    type  : "blog"
+
+}
+
+```
+
+2. get_path
+
+```js
+
+let body = {
+
+[Required Properties]
+    owner : "105",
+    name  : "origin_name",
+    type  : "blog",
+
+}
+
+```
+
+3. read
+
+```js
+
+let body = {
+
+[Required Properties]
+    type  : "blog",
+
+}
+
+```
+
+4. write
+
+```js
+
+let body = {
+
+[Required Properties]
+    owner    : "105",
+    nameFile : "PsdF43OaddasdS",
+    extFile  : ".txt",
+    type     : "content" 
+
+}
+
+```
+
+5. remove
+
+```js
+
+let body = {
+
+[Required Properties]
+    id   : 2,
+    file : "PsdF43OaddasdS.png",
+    type : "goods" 
+
+}
+
+```
+
+6. edit
+
+```js
+
+let body = {
+
+[Required Properties]
+    path    : "http://YOUR_DOMAIN/media/goods/FOX_dsQdfl2UwBd94Nd25/bIdgD5FSa4WdgdDknfa.png",
+    content : "some_contnets",
+
+}
+
+```
+
+7. generate
+
+this methods needn't any json data for HTTP request, just call it in URL then it'll regenerate names of your directory.
+
+
 
 ## Credits
 This package supports every javascript frameworks or native application requests, just config and use it! for manage better your request and bring back your equations, we always prefer [axios](https://github.com/LegenD1995/axios) because of it's feature and manage your promises.
