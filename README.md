@@ -721,7 +721,7 @@ let body = {
 
 7. generate
 
-this methods needn't any json data for HTTP request, just call it in URL then it'll regenerate names of your directory.
+this method needn't any json data for HTTP request, just call it in URL then it'll regenerate names of your directory.
 
 
 
