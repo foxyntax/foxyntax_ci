@@ -75,6 +75,6 @@ class Uploader extends Media_Library
 				$this->ci->db->insert('ci_media', $inserted);
 			}
 		}
-		return 'عملیات آپلود تکمیل شد.';
+		return 'Upload Finished';
 	}
 }

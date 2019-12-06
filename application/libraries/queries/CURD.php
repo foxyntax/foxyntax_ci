@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once (APPPATH . 'libraries/queries/Customize_Lib.php');
 
-class CURD extends Customize_Lib
+class CURD extends Customizer
 {
 	protected $ci, $response, $where, $order, $have, $like, $syntax;
 

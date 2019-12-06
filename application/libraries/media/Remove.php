@@ -17,7 +17,7 @@ class Remove
 			if(! file_exists($dir)) {
 				$this->ci->db	->where('id', $this->post['id'])
 									->delete('ci_media');
-				return ($this->ci->db->affected_rows() == 0) ? false : 'فایل مورد نظر حذف شد.';
+				return ($this->ci->db->affected_rows() == 0) ? false : 'File Removed';
 			}
 			return false;
 		}

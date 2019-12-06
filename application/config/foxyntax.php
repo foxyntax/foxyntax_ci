@@ -18,9 +18,13 @@ $config['encrypt_name_uploaded'] = true;
 $config['remove_space_uploaded'] = true;
 
 
-$config['sms_key'] = '';
-$config['api_key'] = 'afDGS6Msdf9smdf1sEFS98PO21SVdfsfm';
-$config['jwt_key'] = '3dfFGsdf23D1G6fgdf65SsdfG31ADsdoi';
+$config['auth_method']   = 'JWT'; // Also you can choose 'OTP'
+$config['sign_data']     = 'username, password, mobile, type, status, timestamp';
+$config['login_data']    = 'username, password';
+$config['jwt_payload']   = '';
+$config['sms_key']       = '';
+$config['api_key']       = 'afDGS6Msdf9smdf1sEFS98PO21SVdfsfm';
+$config['jwt_key']       = '3dfFGsdf23D1G6fgdf65SsdfG31ADsdoi';
 $config['token_timeout'] = 1;
 /*Generated token will expire in 1 minute for sample code
 * Increase this value as per requirement for production
