@@ -1,5 +1,5 @@
 # Foxyntax_CI | A REST API CodeIgniter 
-Foxyntax_CI is Codeigniter 3 with REST API and new Security library | Matches with [Vue-CLI 3](https://github.com/vuejs/vue-cli)
+Foxyntax_CI is Codeigniter 3 with REST API and JWT library | Matches with [Vue-CLI 3](https://github.com/vuejs/vue-cli)
 
 ## Motivationn
 As you know, Codeigniter doesn't support REST API and using api out of boxes by default.
@@ -9,10 +9,10 @@ with [axios](https://github.com/axios/axios) in front-end
 ## Features
 Features in the project are too many and divided into 4 main parts You can control these part inside your javascript or another client site in your applications or website and they includes:
 
-- Authentication
-- Queries REST API
-- Media REST API
-- SESSION REST API
+- Customize Authentication Methods
+- Controll Queries in Client-Side
+- Controll Media Actions in Client-Side
+- Controll SESSION in Client-Side
 
 ###### NOTE:
 *these features will upgraded, also you can add your custom configurations*
@@ -38,7 +38,7 @@ If you want to use repository as a new project, just copy this project to your h
 
 #### Config foxyntax.php
 
-Set your lenght of salt for encode your files and directories: (*Required*)
+Set your length of salt for encode your files and directories: (*Required*)
 ```php
 $config['salt_file_length'] = 8;
 ```
@@ -49,7 +49,7 @@ Set your base directory for your files and media: (*Required*)
 $config['base_media_dir'] = dirname(__DIR__, 2);
 ```
 
-Config your global Codeigniter uploader library: (*Required*)
+Config your global CodeIgniter uploader library: (*Required*)
 ```php
 $config['allowed_types_uploaded'] = 'png|txt|html';
 $config['max_size_uploaded'] = '1000000';
@@ -61,25 +61,38 @@ $config['remove_space_uploaded'] = true;
 
 Config your api_key for your SMS panel: (*Optional*)
 ```php
-$config['sms_key'] = '';
+$config['sms_key'] = '' // by default;
 ```
+
+Config your authentication methods which protect your application: (*Required*)
+```php
+$config['auth_method']   = 'JWT'; // by default
+```
+
+##### NOTE:
+*JWT is only method for this package, OTP methods will add as soon as possible.*
 
 Config your api key to use REST API: (*Required*)
 ```php
 $config['api_key'] = 'daAS5d4bGFsdDfD5GDfgd654dgFGsD66Vg';
 ```
 
-Config your jwt key to encode your JWT token: (*Required*)
+Config your jwt key to encode your JWT token: (*Required by default*)
 ```php
-$config['jwt_key'] = '3dfFGsdfdad654dgf5d4b65Ssd4dgFGsDi';
+$config['jwt_key'] = '3dfFGsdfdad654dgf5d4b65Ssd4dgFGsDi':
+// if you use another methods like google authenticator or OTP, this config will be optional
 ```
 
 Config your expiration JWT token: (*Optional*)
 ```php
-$config['token_timeout'] = 1;
-// Generated token will expire in 1 minute for sample code
-// Increase this value as per requirement for production
+$config['token_timeout'] = 1; // by default
 ```
+
+Config your payload to set data which send to users by JWT
+```php
+$config['jwt_payload']   = '';  // by default
+```
+
 #### Config constants.php
 
 Set your URL which want to access your REST API, default value was set: (*Optional*)
@@ -112,7 +125,7 @@ that's all !
 You can learn how to send HTTP request (POST recommended), we provide some controllers for get your "application/json" content and do your actions,here it is:
 
 ###### NOTE:
-*all of libraries are using JWT methods and you must have and set api key in your header request*.
+*all of libraries are using JWT methods by default but you can change your method for protect your API.*
 
 ### Using Query Controller
 The query controllers use REST API and provide some query_builders from Foxyntax_CI by using "query" libraries.
@@ -174,7 +187,7 @@ let body = {
     /* array - It's like "where", you can switch between have() and or_have() functions */
     have: [
         
-        {query: "name = "Foxyntax", combine: "AND"}, // example
+        {query: "name = Foxyntax", combine: "AND"}, // example
         
         // and other conditions ... 
 
@@ -239,7 +252,7 @@ let body = {
     
     
     /* int  - It defines and used for "read" request function like select() */
-    limit: 20 // example
+    limit: 20, // example
     
     
     /* int - It defines and used for "read" request function like select_max() */
@@ -254,7 +267,8 @@ Now you know our JSON parameters and you must to know how to call Query Library?
 You have to send your json by "HTTP" request like POST and before that, you need JSON Web Token and set it on your "HEADER" request to access your end point. Here, It's our patterns of URL request in Query Library: 
 
 ```php
-    // URL : http://YOUR_DOMAIN/api/query/curd/NAME_OF_FUNCTION
+    // AUTH is Optional, if you want check api_key or any token in authentication method, you must to set "1"
+    // URL : http://YOUR_DOMAIN/api/query/curd/NAME_OF_FUNCTION/AUTH/
 ```
 
 And here they are main functions in Query Library:
@@ -302,14 +316,14 @@ For each function you can config your json request, It won't difficult. Because 
 
 let body = {
 
-    func: "select", [optional] : (leave it, if you want to use SELECT query)
+    func: "select", // [optional] : (leave it, if you want to use SELECT query)
     cols: "id, name, family",  // [optional] : (leave it if you want select all columns) 
     table: "user_meta",
     where: [
         {query: "id = 2"}
     ], // [optional] : ("have", "order" and "like" properties are optional, so leave them if you needn't they)
     responseType: "row", // [optional] : (leave it if you want to get values by result() function)
-    formatDate: "H:i:s" // [optional] : (you can config your special coloumns which have timestamp and convert it to JDF)
+    formatDate: "H:i:s", // [optional] : (you can config your special coloumns which have timestamp and convert it to JDF)
     limit: null, // [optional] : (leave it if if you needn't) 
     offset: null, // [optional] : (leave it if if you needn't)
     
@@ -363,7 +377,7 @@ let body = {
 
 let body = {
 
- func: "update", [optional] : (leave it, if you want to use UPDATE query)
+ func: "update", // [optional] : (leave it, if you want to use UPDATE query)
     cols: "id, name, family",  // [optional] : (leave it if you want select all columns) 
     table: "user_meta",
     where: [
@@ -409,7 +423,7 @@ let body = {
 
 let body = {
 
-    func: "delete" [optional] : (leave it, if you want to use DELETE FROM query)
+    func: "delete", // [optional] : (leave it, if you want to use DELETE FROM query)
     table: "user_meta",
     where: [
         {query: "id = 2"}
@@ -422,6 +436,100 @@ let body = {
 - custom function
 
 1. for custom request you won't need to set "func" property, just set "query" !
+
+### Using Auth Controller
+The Auth controller provide 3 main methods and use auth libraries for decide Which authentication methods are needed to execute?
+
+you can run your security methods by these URL:
+
+```php
+ // FOR SIGN UP
+ // URL : http://YOUR_DOMAIN/api/auth/sign_up
+
+ // FOR LOGIN
+ // URL : http://YOUR_DOMAIN/api/auth/login
+
+ // FOR TRACK (MAYBE NOT AVAILABLE FOR EVERY METHODS LIKE GOOGLE AUTHENTICATOR)
+ // URL : http://YOUR_DOMAIN/api/auth/check_token
+```
+
+###### NOTE:
+*For now, you can use JWT methods, however OTP will ready for you in next release.*
+
+#### Json Properties in JWT Methods
+```js
+
+let body = {
+
+    /* string - It defines coloumn which you want search it on select query */
+    check: "id",
+    
+    /* string - It defines table which your query execute on it */
+    table: "ci_user",
+    
+    /* object - It defines where() for search current user who signed up */
+    condition: { username: 'milad', mobile: '9156284764' },
+    
+    /* object - It defines JWT payload, api_key will add automatically */
+    payload: {user: 'legend1995', admin: true},
+    
+    /* string - It defines password name coloumn */
+    password: 'password',
+
+}
+
+```
+
+#### Call JWT Authenticators
+
+1. Signup
+This method needs 2 HTTP request for complete your action. first request will check user exist and make a JWT.
+
+In secound request, you have to use query methods in this package to save your user after get JWT and permission;
+
+```js
+let body = {
+
+// [Required Properties]
+    check     : "id",
+    table     : "ci_user",
+    condition : {
+        username: 'legend1995',
+        mobile  : '9156284764'        
+    },  
+
+// [Optional Properties]
+    payload   : {admin: true}
+
+}
+```
+
+2. Login
+It's like Login but you need one HTTP request, if login sucessed, JWT will sent to client-side
+
+```js
+let body = {
+
+// [Required Properties]
+    password  : "password",
+    table     : "ci_user",
+    condition : {
+        username: 'legend1995',
+        mobile  : '9156284764'        
+    },  
+
+// [Optional Properties]
+    payload   : {admin: true}
+
+}
+```
+
+2. Tracking user
+When you want to track users and take permission to them, you can check their JWT before every actions
+
+##### NOTE:
+*Also you don't need to send any JSON in body request, just set your JWT in header request.*
+
 
 ### Using Sessions Controllerr
 
@@ -452,7 +560,8 @@ let body = {
 as you know, you must follow this format to set url for HTTP requests:
 
 ```php
-    // URL : http://YOUR_DOMAIN/api/sessions/sess/NAME_OF_FUNCTION
+    // AUTH is Optional, if you want check api_key or any token in authentication method, you must to set "1"
+    // URL : http://YOUR_DOMAIN/api/sessions/sess/NAME_OF_FUNCTION/AUTH
 ```
 
 And here they are main functions in Sessions Libraries, we just tell you their names based of "func" property
@@ -590,7 +699,7 @@ let body = {
     
     
     /* string - It defines your content */
-    content: "some_contnets"
+    content: "some_contnets",
     
     /* string - It defines full path directory your file */
     path: "http://YOUR_DOMAIN/media/.../YOUR_FILE"
@@ -605,9 +714,10 @@ for call this library, you must follow this format to set url for HTTP requests:
 
 ```php
 
-    // URL : http://YOUR_DOMAIN/api/media/surf/NAME_OF_FUNCTION/TYPE_OF_FILE
+    // URL : http://YOUR_DOMAIN/api/media/surf/NAME_OF_FUNCTION/TYPE_OF_FILE/AUTH
     
-    /* 
+    /*
+     * AUTH is Optional, if you want check api_key or any token in authentication method, you must to set "1"
      * TYPE_OF_FILE is OPTIONAL and should use when you want upload some file(s) which is/are not images like .png or .jpg
      */
      
@@ -629,7 +739,7 @@ here they are your property to config your data HTTP request:
 
 let body = {
 
-[Optional Properties] : (if you want to use global setting in foxyntax.php, leave it)
+// [Optional Properties] : (if you want to use global setting in foxyntax.php, leave it)
     allowTypes  : "png | jpg | pdf",
     maxSize     : "2024", 
     maxWith     : "1080", 
@@ -638,7 +748,7 @@ let body = {
     removeSpace : true,
     multiple    : true,
     
-[Required Properties]
+// [Required Properties]
     owner : "105",
     type  : "blog"
 
@@ -652,7 +762,7 @@ let body = {
 
 let body = {
 
-[Required Properties]
+// [Required Properties]
     owner : "105",
     name  : "origin_name",
     type  : "blog",
@@ -667,7 +777,7 @@ let body = {
 
 let body = {
 
-[Required Properties]
+// [Required Properties]
     type  : "blog",
 
 }
@@ -680,7 +790,7 @@ let body = {
 
 let body = {
 
-[Required Properties]
+// [Required Properties]
     owner    : "105",
     nameFile : "PsdF43OaddasdS",
     extFile  : ".txt",
@@ -696,7 +806,7 @@ let body = {
 
 let body = {
 
-[Required Properties]
+// [Required Properties]
     id   : 2,
     file : "PsdF43OaddasdS.png",
     type : "goods" 
@@ -711,7 +821,7 @@ let body = {
 
 let body = {
 
-[Required Properties]
+// [Required Properties]
     path    : "http://YOUR_DOMAIN/media/goods/FOX_dsQdfl2UwBd94Nd25/bIdgD5FSa4WdgdDknfa.png",
     content : "some_contnets",
 
@@ -722,8 +832,6 @@ let body = {
 7. generate
 
 this method needn't any json data for HTTP request, just call it in URL then it'll regenerate names of your directory.
-
-
 
 ## Credits
 This package supports every javascript frameworks or native application requests, just config and use it! for manage better your request and bring back your equations outside of PHP, we always prefer [axios](https://github.com/LegenD1995/axios) because of it's feature and manage your promises.

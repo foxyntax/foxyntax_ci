@@ -19,8 +19,6 @@ $config['remove_space_uploaded'] = true;
 
 
 $config['auth_method']   = 'JWT'; // Also you can choose 'OTP'
-$config['sign_data']     = 'username, password, mobile, type, status, timestamp';
-$config['login_data']    = 'username, password';
 $config['jwt_payload']   = '';
 $config['sms_key']       = '';
 $config['api_key']       = 'afDGS6Msdf9smdf1sEFS98PO21SVdfsfm';
