@@ -1,7 +1,7 @@
 # Foxyntax_CI | A REST API CodeIgniter 
 Foxyntax_CI is Codeigniter 3 with REST API and JWT library | Matches with [Vue-CLI 3](https://github.com/vuejs/vue-cli)
 
-## Motivationn
+## Motivation
 As you know, Codeigniter doesn't support REST API and using api out of boxes by default.
 Now, this project provide some features for help you to create your REST API. this project will match
 with [axios](https://github.com/axios/axios) in front-end
