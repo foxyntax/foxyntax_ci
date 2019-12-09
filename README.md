@@ -1,13 +1,13 @@
 # Foxyntax_CI | A REST API CodeIgniter 
 Foxyntax_CI is Codeigniter 3 with REST API and JWT library | Matches with [Vue-CLI 3](https://github.com/vuejs/vue-cli)
 
-## Motivationn
+## Motivation
 As you know, Codeigniter doesn't support REST API and using api out of boxes by default.
 Now, this project provide some features for help you to create your REST API. this project will match
 with [axios](https://github.com/axios/axios) in front-end
 
 ## Features
-Features in the project are too many and divided into 4 main parts You can control these part inside your javascript or another client site in your applications or website and they includes:
+There are a lot of features in the project and divided into 4 main parts. You can control these parts inside your javascript or another client-side in your applications or websites and they includes:
 
 - Customize Authentication Methods
 - Controll Queries in Client-Side
@@ -15,7 +15,7 @@ Features in the project are too many and divided into 4 main parts You can contr
 - Controll SESSION in Client-Side
 
 ###### NOTE:
-*these features will upgraded, also you can add your custom configurations*
+*These features will upgraded, also you can add your custom configurations*
 
 ## Dependencies
 
@@ -114,7 +114,7 @@ If you want to use manually, follow this command:
 2. copy and past controllers | models directories to your own
 3. copy and past foxyntax.php to *"application/config"* directory
 4. copy and replace constants.php to *"application/config"* directory
-5. add ci_"*" tables to your own database
+5. add ci_"*" tables to your own database [OPTIONAL]
 6. config your foxyntax.php and constants.php as we said *above* and 
 another required configurations like [database.php](https://codeigniter.com/user_guide/database/configuration.html)
 , [config.php](https://codeigniter.com/userguide3/libraries/config.html) and etc.
@@ -125,7 +125,7 @@ that's all !
 You can learn how to send HTTP request (POST recommended), we provide some controllers for get your "application/json" content and do your actions,here it is:
 
 ###### NOTE:
-*all of libraries are using JWT methods by default but you can change your method for protect your API.*
+*All of the libraries are using JWT methods by default but you can change your method for protect your API.*
 
 ### Using Query Controller
 The query controllers use REST API and provide some query_builders from Foxyntax_CI by using "query" libraries.
@@ -260,7 +260,7 @@ let body = {
 }
 
 ```
-Now you know our JSON parameters and you must to know how to call Query Library?<br><br>
+Now you know our JSON parameters and you must to know how to call Query Library?
 
 #### Call Query Librarys
 
@@ -289,7 +289,7 @@ And here they are main functions in Query Library:
 For each function you can config your json request, It won't difficult. Because of your knowledge about JSON properties, we just tell you their names based of "func" property
 
 ###### NOTE:
-*optional properties doesn't need to send by HTTP request, however we are using them here to know that how they're working!*
+*Optional properties doesn't need to send by HTTP request, however we are using them here to know that how they're working!*
 
 - create functions
 
@@ -435,7 +435,7 @@ let body = {
 
 - custom function
 
-1. for custom request you won't need to set "func" property, just set "query" !
+1. For custom request you won't need to set "func" property, just set "query" !
 
 ### Using Auth Controller
 The Auth controller provide 3 main methods and use auth libraries for decide Which authentication methods are needed to execute?
@@ -454,7 +454,7 @@ you can run your security methods by these URL:
 ```
 
 ###### NOTE:
-*For now, you can use JWT methods, however OTP will ready for you in next release.*
+*For now, you can use JWT methods, however OTP will ready for you on next releases.*
 
 #### Json Properties in JWT Methods
 ```js
@@ -483,7 +483,7 @@ let body = {
 #### Call JWT Authenticators
 
 1. Signup
-This method needs 2 HTTP request for complete your action. first request will check user exist and make a JWT.
+This method needs 2 HTTP requests for complete your action. first request will check user exist and make a JWT.
 
 In secound request, you have to use query methods in this package to save your user after get JWT and permission;
 
@@ -557,14 +557,14 @@ let body = {
 ```
 
 #### Call Sessions Libraries
-as you know, you must follow this format to set url for HTTP requests:
+As you know, you must follow this format to set url for HTTP requests:
 
 ```php
     // AUTH is Optional, if you want check api_key or any token in authentication method, you must to set "1"
     // URL : http://YOUR_DOMAIN/api/sessions/sess/NAME_OF_FUNCTION/AUTH
 ```
 
-And here they are main functions in Sessions Libraries, we just tell you their names based of "func" property
+and here they are main functions in Sessions Libraries, we just tell you their names based of "func" property
 
 - session: includes "addSess" | "readSess" | "checkSess" | "destroy" | "unsetSess"
 ("unsetSess" is a default value in it's "func" property)
@@ -710,7 +710,7 @@ let body = {
 ```
 
 #### Call Media Libraries
-for call this library, you must follow this format to set url for HTTP requests:
+For call this library, you must follow this format to set url for HTTP requests:
 
 ```php
 
@@ -727,7 +727,7 @@ And here they are main functions in Sessions Libraries, they haven't more funcio
 
 1. upload
 
-if you want to use this action, you must set "images" property in your $_FILE on PHP; for example in HTML:
+If you want to use this action, you must set "images" property in your $_FILE on PHP; for example in HTML:
 
 ```html
 <input type="file" name="images">
@@ -831,7 +831,7 @@ let body = {
 
 7. generate
 
-this method needn't any json data for HTTP request, just call it in URL then it'll regenerate names of your directory.
+This method needn't any json data for HTTP request, just call it in URL then it'll regenerate names of your directory.
 
 ## Credits
 This package supports every javascript frameworks or native application requests, just config and use it! for manage better your request and bring back your equations outside of PHP, we always prefer [axios](https://github.com/LegenD1995/axios) because of it's feature and manage your promises.
