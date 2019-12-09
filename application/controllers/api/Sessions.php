@@ -32,6 +32,7 @@ class Sessions extends CI_Controller
          }
       } else {
          $this->autoload($type);
+         api_responser($this->response);
       }
 	}
 
