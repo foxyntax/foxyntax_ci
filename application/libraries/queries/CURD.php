@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-require_once (APPPATH . 'libraries/queries/Customize_Lib.php');
+require_once (APPPATH . 'libraries/queries/Customizer.php');
 
 class CURD extends Customizer
 {
