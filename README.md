@@ -299,7 +299,10 @@ For each function you can config your json request, It won't difficult. Because 
 
  let body = {
     func: "insert", // [optional] : (leave it, if you want to use INSERT query)
-    row: "username, password, status, timestamp",
+    row: {
+        username : 'milad',
+        password : 'mypassword'
+    },
     table: "ci_user"
     
 }
